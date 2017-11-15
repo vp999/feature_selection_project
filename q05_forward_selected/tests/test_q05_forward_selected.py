@@ -1,6 +1,6 @@
 from unittest import TestCase
 from ..build import forward_selected
-from inspect import getargspec
+from inspect import getfullargspec
 from sklearn.linear_model import LinearRegression
 import pandas as pd
 import numpy as np
@@ -12,9 +12,10 @@ model = LinearRegression()
 class TestForward_selected(TestCase):
     def test_forward_selected(self):
         # Input parameters tests
-        args = getargspec(forward_selected)
-        self.assertEqual(len(args[0]), 2, "Expected arguments %d, Given %d" % (2, len(args[0])))
-        self.assertEqual(args[3], None, "Expected default values do not match given default values")
+		args = getfullargspec(forward_selected).args
+        args_default = getfullargspec(forward_selected).defaults
+        self.assertEqual(len(args), 2, "Expected arguments %d, Given %d" % (2, len(args)))
+        self.assertEqual(args_default, None, "Expected default values do not match given default values")
 
         # Return data types
         fwd_selection, best_score = forward_selected(data, model)

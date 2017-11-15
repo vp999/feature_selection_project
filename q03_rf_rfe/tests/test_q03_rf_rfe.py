@@ -4,16 +4,17 @@ data = pd.read_csv('data/house_prices_multivariate.csv')
 
 from unittest import TestCase
 from ..build import rf_rfe
-from inspect import getargspec
+from inspect import getfullargspec
 
 
 class TestRf_rfe(TestCase):
     def test_rf_rfe(self):
 
         # Input parameters tests
-        args = getargspec(rf_rfe)
-        self.assertEqual(len(args[0]), 1, "Expected arguments %d, Given %d" % (1, len(args[0])))
-        self.assertEqual(args[3], None, "Expected default values do not match given default values")
+        args = getfullargspec(rf_rfe).args
+        args_default = getfullargspec(rf_rfe).defaults
+        self.assertEqual(len(args), 1, "Expected arguments %d, Given %d" % (1, len(args)))
+        self.assertEqual(args_default, None, "Expected default values do not match given default values")
 
         # Return data types
         expected = ['LotFrontage', 'LotArea', 'YearBuilt', 'YearRemodAdd', 'MasVnrArea', 'BsmtFinSF1', 'BsmtUnfSF',
