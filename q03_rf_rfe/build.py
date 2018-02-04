@@ -8,5 +8,13 @@ from sklearn.ensemble import RandomForestClassifier
 
 
 # Your solution code here
+def rf_rfe(df):
+    X, y = df.iloc[:,:-1], df.iloc[:,-1]
+    model =RandomForestClassifier()
+    # create the RFE model and select 3 attributes
+    rfe = RFE(model)
+    rfe = rfe.fit(X, y)
+    #print rfe.ranking_
+    return X.columns.values[rfe.get_support()].tolist()
 
-
+#print (rf_rfe(data))
