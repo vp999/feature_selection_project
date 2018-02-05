@@ -11,7 +11,7 @@ expected_var = ['OverallQual', 'GrLivArea', 'BsmtFinSF1', 'GarageCars', 'Kitchen
                         'YearRemodAdd',
                         'LotArea', 'MasVnrArea', 'WoodDeckSF']
 
-fwd_selection, best_score = forward_selected(data, model)
+print  forward_selected(data, model)
 top_10 = fwd_selection[0:10]
 
 expected_acc = [0.61972765016619102, 0.7110122362921284, 0.74208020244393813, 0.76370229136595302,
@@ -29,7 +29,7 @@ class TestForward_selected(TestCase):
         self.assertEqual(args[3], None, "Expected default values do not match given default values")
 
         # Return data types
-    def test_forward_selected_return_instance_1(self):  
+    def test_forward_selected_return_instance_1(self):
         self.assertIsInstance(fwd_selection, list,
                               "Expected data type for return value is `List`, you are returning %s" % (
                                   type(fwd_selection)))
@@ -39,7 +39,7 @@ class TestForward_selected(TestCase):
                                   type(best_score)))
 
         # Return values tests
-    def test_forward_selected_return_values_top10(self): 
+    def test_forward_selected_return_values_top10(self):
         self.assertListEqual(top_10, expected_var, "Expected values does not match returned value")
 
     def test_forward_selected_return_array(self):
